@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title (tap)="showCategories($event)" (click)="showCategories($event)">
+        {{category.display_name}}
+        <ion-icon name='arrow-dropdown'></ion-icon>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg">
+  <ion-card *ngFor="let course of courses">
+    <img src="{{course.thumbnail_url}}" (tap)="itemSelected(course)" (click)="itemSelected(course)" />
+    <ion-card-content>
+      <ion-card-title (tap)="itemSelected(course)" (click)="itemSelected(course)">
+        {{course.title}}
+      </ion-card-title>
+      <ion-note>With {{course.instructor[0].display_name}}</ion-note>
+      <p>{{course | truncateString}}</p>
+      <ion-note>{{course.num_lessons}} lessons - {{course.duration | duration}}</ion-note>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col col-8>
+        <button ion-button clear color="secondary" (tap)="itemSelected(course)" (click)="itemSelected(course)">
+          View Course
+        </button>
+      </ion-col>
+      <ion-col col-2 justify-content-center>
+        <button ion-button clear color="secondary" small icon-left>
+          <ion-icon name='bookmark'></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-2 justify-content-center>
+        <button ion-button clear color="secondary" small icon-left>
+          <ion-icon name='download'></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

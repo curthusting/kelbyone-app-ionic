@@ -1,0 +1,4 @@
+<ion-list>
+  <ion-list-header>Filter by Category</ion-list-header>
+  <button ion-item close-popover  *ngFor="let category of categories"  (tap)="categorySelected(category)" (click)="categorySelected(category)">{{category.display_name}}</button>
+</ion-list>

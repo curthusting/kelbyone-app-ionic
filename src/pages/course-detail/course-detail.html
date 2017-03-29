@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ course.title }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only menuToggle><ion-icon name="options"></ion-icon></button>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <div>
+    <ion-segment [(ngModel)]="display">
+      <ion-segment-button value="about">
+        About
+      </ion-segment-button>
+      <ion-segment-button value="lessons">
+        Lessons
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <img src="{{course.thumbnail_url}}" />
+</ion-header>
+
+<ion-content class="card-background-page">
+  <div [ngSwitch]="display">
+    <ion-list *ngSwitchCase="'about'">
+      <ion-item text-wrap>
+        <ion-avatar item-left>
+          <img src="{{course.instructor[0].thumbnail_url}}">
+        </ion-avatar>
+        <h1>{{course.title}}</h1>
+        <ion-note>With {{course.instructor[0].display_name}}</ion-note>
+      </ion-item>
+
+      <ion-row padding-left padding-right>
+        <p>{{course.description}}</p>
+      </ion-row>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'lessons'">
+      <ion-item text-wrap *ngFor="let lesson of lessons" (tap)="itemSelected(lesson)" (click)="itemSelected(lesson)">
+        <ion-thumbnail landscape item-left>
+          <img src="{{lesson.thumbnail_url}}">
+        </ion-thumbnail>
+        <h2>{{lesson.title}}</h2>
+        <p>{{lesson.description}}</p>
+        <!-- <ion-note>{{lesson.duration | duration}}</ion-note> -->
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
